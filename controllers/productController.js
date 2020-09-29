@@ -33,7 +33,6 @@ exports.product_detail = function(req, res, next) {
     .exec(function (err, results) {
         if (err) { return next(err); }
         //successful, render
-        console.log(results)
         res.render('game_detail', {title: results.name, desc: results.description})
     }) 
 }
