@@ -4,7 +4,7 @@ var router = express.Router();
 //require controller modules
 var product_name_controller = require('../controllers/productController')
 var genre_controller = require('../controllers/genreController')
-
+var admin_controller = require('../controllers/adminController')
 // product routes // 
 
 //GET product/games home page
@@ -61,9 +61,14 @@ router.get('/genre/:id', genre_controller.genre_detail)
 router.get('/genre', genre_controller.genre_list)
 
 //GET request for admin 
-router.get('/admin', function(req, res) {
-    res.render('admin', {text: "Under construction"});
-});
+router.get('/admin', admin_controller.admin_get);
+
+//POST request for admin 
+router.post('/admin/', admin_controller.admin_post);
+
+//POST request for admin 
+router.get('/admin/control', admin_controller.admin_detail_get);
+
 
 
 

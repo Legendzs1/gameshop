@@ -1,22 +1,20 @@
-const  MONGODBURL = require('./mongoDB')
+var MONGODB = require('./dbconnect')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
-
-
-
+var mongoose = require('mongoose');
 var app = express();
 //Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = MONGODBURL;
-//var mongoDB = 'mongodb+srv://Legendzs:OpensesameASH12@cluster0.oj14z.mongodb.net/inventory_system?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+
+var mongoDB = MONGODB.MONGODB;
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true}, () => console.log("connected to db"));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // view engine setup
@@ -29,6 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/shop', catalogRouter);  // Add catalog routes to middleware chain.
@@ -36,6 +36,7 @@ app.use('/shop', catalogRouter);  // Add catalog routes to middleware chain.
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

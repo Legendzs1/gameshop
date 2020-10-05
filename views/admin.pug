@@ -3,3 +3,12 @@ extends layout
 block content
   h1= text
   
+  form(action='', method = 'POST')
+    p
+      input(type="hidden", name="email", value='email@gmail.com')
+      input(type='password', name="password", placeholder="Password...")
+    input(type='submit', value='Submit')
+
+  if errors 
+   ul
+     li #{errors}
