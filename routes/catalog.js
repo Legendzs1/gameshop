@@ -16,6 +16,12 @@ router.get('/admin/game/create', product_name_controller.game_create_get)
 //POST request to create a Game 
 router.post('/admin/game/create', product_name_controller.game_create_post)
 
+//GET request to delete a game form
+router.get('/admin/game/delete', product_name_controller.game_delete_form_get)
+
+//POST request to delete a game form
+router.post('/admin/game/delete', product_name_controller.game_delete_form_post)
+
 //GET request to delete a game
 router.get('/admin/game/:id/delete', product_name_controller.game_delete_get)
 
@@ -41,6 +47,12 @@ router.get('/admin/genre/create', genre_controller.genre_create_get)
 
 //POST request for creating Genre
 router.post('/admin/genre/create', genre_controller.genre_create_post)
+
+//GET request for deleting Genre form
+router.get('/admin/genre/delete', genre_controller.genre_delete_form_get)
+
+//POST request for deleting Genre form
+router.post('/admin/genre/delete', genre_controller.genre_delete_form_post)
 
 //GET request for deleting Genre
 router.get('/admin/genre/:id/delete', genre_controller.genre_delete_get)

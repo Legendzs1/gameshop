@@ -1,0 +1,14 @@
+extends admin_layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Search for Genre to delete:
+      input#name.form-control(type='text', placeholder='PVP, RPG etc.' name='name')
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    p= errors
+

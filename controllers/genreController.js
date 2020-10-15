@@ -1,7 +1,7 @@
 var Genre = require('../models/genre');
 var ProductName = require('../models/productname')
 var async = require('async');
-const validator = require('express-validator');
+const { body, validationResult, sanitizeBody } = require('express-validator');
 
 //Display list of all Genres
 exports.genre_list = function(req, res, next) {
@@ -44,16 +44,16 @@ exports.genre_create_get = function(req, res, next) {
 exports.genre_create_post =  [
    
     // Validate that the name field is not empty.
-    validator.body('name', 'Genre name required').trim().isLength({ min: 1 }),
+    body('name', 'Genre name required').trim().isLength({ min: 3 }),
     
     // Sanitize (escape) the name field.
-    validator.sanitizeBody('name').escape(),
+    sanitizeBody('name').escape(),
   
     // Process request after validation and sanitization.
     (req, res, next) => {
   
       // Extract the validation errors from a request.
-      const errors = validator.validationResult(req);
+      const errors = validationResult(req);
   
       // Create a genre object with escaped and trimmed data.
       var genre = new Genre(
@@ -111,3 +111,33 @@ exports.genre_update_get = function(req, res) {
 exports.genre_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre update POST');
 };
+
+//Handles genre delete form on GET 
+exports.genre_delete_form_get = function(req, res) {
+  res.render('genre_delete_form', {title: 'Delete a Genre'});
+}
+
+//Handles genres delete form on POST
+exports.genre_delete_form_post = [
+  (req, res, next) => {
+      // Extract the validation errors from a request.
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        // There are errors. Render the form again with sanitized values/error messages.
+        res.render('genre_delete_form', { title: 'Delete a Genre', errors: errors.array()});
+        return;
+      }
+      else {
+        var query = {name:req.body.name}
+        Genre.find(query)
+        .exec(function(err, result) {
+          console.log(result[0]._id)
+          Genre.findByIdAndRemove(result[0]._id, function deleteGenre(err) {
+            if (err) { return next(err); }
+            res.redirect('/shop/genre')
+          })
+      })
+    }
+  }
+]

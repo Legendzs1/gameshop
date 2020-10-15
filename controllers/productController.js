@@ -94,9 +94,18 @@ exports.game_create_post = [
 ];
 
 //Display game delete form on GET
-exports.game_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Game delete GET')
-}
+exports.game_delete_get = function(req, res, next) {
+
+    ProductName.findById(req.params.id)
+    .exec(function(err, results) {
+        if (err) { return next(err); }
+        if (results==null) { // No results.
+            res.redirect('/shop/admin/control');
+        }
+        // Successful, so render.
+        res.render('game_delete', { title: 'Delete Game'} );
+    });
+};
 
 //Handle game delete form on POST
 exports.game_delete_post = function(req, res) {
@@ -112,3 +121,33 @@ exports.game_update_get = function(req, res) {
 exports.game_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Game update POST')
 }
+
+//Handles game delete form on GET 
+exports.game_delete_form_get = function(req, res) {
+    res.render('game_delete_form', {title: 'Delete a Game'});
+}
+
+//Handles game delete form on POST
+exports.game_delete_form_post = [
+    (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+  
+        if (!errors.isEmpty()) {
+          // There are errors. Render the form again with sanitized values/error messages.
+          res.render('game_delete_form', { title: 'Delete a Game', errors: errors.array()});
+          return;
+        }
+        else {
+          var query = {name:req.body.name}
+          ProductName.find(query)
+          .exec(function(err, result) {
+            console.log(result[0]._id)
+            ProductName.findByIdAndRemove(result[0]._id, function deleteGame(err) {
+              if (err) { return next(err); }
+              res.redirect('/shop/game')
+            })
+        })
+      }
+    }
+  ]

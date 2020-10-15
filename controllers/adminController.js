@@ -34,3 +34,5 @@ exports.admin_post = function(req,res,next) {
 exports.admin_detail_get = function(req,res) {
     res.render("admin_detail", {text: "Admin detail under construction"})
 }
+
+
