@@ -15,7 +15,7 @@ var helmet = require('helmet');
 var app = express();
 //Set up mongoose connection
 app.use(helmet());
-var mongoDB = MONGODB.MONGODB;
+var mongoDB = process.env.MONGODB_URI || dev_db_url;;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true}, () => console.log("connected to db"));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
