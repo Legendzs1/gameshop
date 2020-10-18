@@ -19,7 +19,7 @@ exports.index = function(req, res) {
 
 //Display list of all games
 exports.product_list = function(req, res, next) {
-    ProductName.find({}, 'name genre')
+    ProductName.find({}, 'name genre iconurl description')
     .populate('genre')
     .exec(function (err , list_products) {
         if(err) { return next(err);}
@@ -27,14 +27,15 @@ exports.product_list = function(req, res, next) {
         res.render('game_list', { title: 'Games', product_list: list_products});
     });
 };
-
+//
 //Display detail page for a specific game
 exports.product_detail = function(req, res, next) {
     ProductName.findById(req.params.id)
+    .populate('genre')
     .exec(function (err, results) {
         if (err) { return next(err); }
         //successful, render
-        res.render('game_detail', {title: results.name, desc: results.description})
+        res.render('game_detail', {title: results.name, desc: results.description, genres:results.genre})
     }) 
 }
 

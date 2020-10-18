@@ -1,15 +1,16 @@
 extends layout
 
 block content
-  h1= title
+  h1(class='game-list') #{title}
   
-  ul
-    - product_list//.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
-    each game in product_list
-      li 
-        a(href=game.url) #{game.name}
-        each genre in game.genre
-            a(href=genre.url) (#{genre.name})
-            
-    else
-      li There are no games.
+    
+    div(class='container mt-3')
+      div(class='card-deck')
+        each game in product_list
+          div(class='card mb-4 card-styles h-100')
+            img(class='card-img-top game-icon' src=game.iconurl alt='Card image cap') 
+            div(class='card-body')
+              a(href=game.url class='game-title')
+                h5(class='card-title') #{game.name}
+              p(class='card-text game-description') #{game.description}
+              button(class='btn btn-light') Buy Now

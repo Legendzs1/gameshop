@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1= text
-  
-  form(action='', method = 'POST')
-    p
-      input(type="hidden", name="email", value='email@gmail.com')
-      input(type='password', name="password", placeholder="Password...")
-    input(type='submit', value='Submit')
+  div(class='admin-stuff')
+    h1(class='admin-title') #{text}
+    
+    form(action='', method = 'POST' class='admin-body')
+      p
+        input(type="hidden", name="email", value='email@gmail.com')
+        input(type='password', name="password", placeholder="Password..." class='form-control')
+      input(type='submit', value='Submit' class='btn-outline-dark btn ')
 
   if errors 
    ul

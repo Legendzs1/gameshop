@@ -1,5 +1,90 @@
-.sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
+.navbar-nav { 
+  flex-direction: row;
+  margin: 5px;
 }
+
+.navbar-item {
+  margin-left: 5px;
+  text-align: center;
+}
+
+.admin-text {
+  text-align: center;
+  font-size: 50px;
+}
+.home-content>.container>ul>li {
+  list-style-type: none;
+}
+.home-content {
+  text-align: center;
+}
+
+.game-list{
+  text-align: center;
+}
+
+.card-styles{
+  min-width: 18rem; 
+  max-width: 18rem;
+  min-height: 25%;
+  max-height: 25%;
+
+}
+
+.game-genre {
+  font-size: 18px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+.game-description {
+  font-size: 20px;
+}
+
+.game-icon {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-title {
+  font-size: 30px;
+  width: 100%;
+}
+
+.game-title {
+  width: 100%;
+  height: 100%;
+}
+
+.genre-list {
+  list-style-type: none;
+
+}
+.genre-title {
+  text-align: center;
+}
+
+.genre-list-button{
+  margin: 15px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 50px;
+}
+
+.admin-body {
+  text-align: center;
+}
+
+.admin-stuff{
+  position: fixed; /* or absolute */
+  top: 30%;
+  left: 40%;
+ }

@@ -1,14 +1,13 @@
 extends layout
 
 block adminSidebar
-    ul(class='sidebar-nav')
-        li 
-            a(href='/shop/admin/genre/create') Create Genre
-        li 
-            a(href='/shop/admin/game/create') Create Game
-        li 
-            a(href='/shop/admin/game/delete') Delete Game
-        li 
-            a(href='/shop/admin/genre/delete') Delete Genre
+    li(class='nav-item') 
+        a(href='/shop/admin/genre/create' class='nav-link navbar-item') Create Genre
+    li(class='nav-item') 
+        a(href='/shop/admin/game/create' class='nav-link navbar-item') Create Game
+    li(class='nav-item') 
+        a(href='/shop/admin/game/delete' class='nav-link navbar-item') Delete Game
+    li(class='nav-item') 
+        a(href='/shop/admin/genre/delete' class='nav-link navbar-item') Delete Genre
 
 block content

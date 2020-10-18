@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  h1= title
+  h1(class='genre-title')= title
   
-  ul
+  ul(class='genre-list grid-container')
     each genre in genre_list
-      li 
-        a(href=genre.url) #{genre.name} 
+      li(class='genre-list-button')
+        a(href=genre.url class='btn btn-light') #{genre.name} 
 
     else
       li There are no genres.

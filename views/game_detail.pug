@@ -5,5 +5,7 @@ block content
   h1 Game: #{title}
 
   div(style='margin-left:20px;margin-top:20px')
+  each genre in genres
+    a(href=genre.url class='btn btn-dark game-genre') #{genre.name} 
 
   p #[strong Summary:] #{desc}  
