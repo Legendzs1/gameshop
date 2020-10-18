@@ -16,7 +16,7 @@ var app = express();
 //Set up mongoose connection
 app.use(helmet());
 var dev_db_url = MONGODB.MONGODB;
-var mongoDB = process.env.MONGODB_URI || dev_db_url;
+var mongoDB = process.env.MONGODB_URI ; //|| dev_db_url remember to add this back if I ever work on it again
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true}, () => console.log("connected to db"));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
