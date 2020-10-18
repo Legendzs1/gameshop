@@ -2,11 +2,11 @@
   "name": "inventory-app",
   "version": "0.0.0",
   "engines": {
-    "node": "10.22.1"
+    "node": "12.18.4"
   },
   "private": true,
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
